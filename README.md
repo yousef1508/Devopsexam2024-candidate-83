@@ -9,7 +9,6 @@
 - **API Gateway URL**:  
 https://aj9pvletme.execute-api.eu-west-1.amazonaws.com/Prod/generate/
 
-less
 
 - **Eksempel på S3-filbane**:  
 Inkluder en eksempelsti for en opplastet fil i S3-bøtta:  
