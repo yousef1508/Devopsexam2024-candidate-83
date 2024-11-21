@@ -55,3 +55,52 @@ Workflow trigges automatisk ved push til main-grenen.
 
 **Lenke til vellyket kjørt GitHub Actions workflow:**
 https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11946931320
+
+
+# Oppgave 2: Terraform - Infrastruktur som kode
+## Oppgave 2A: Konfigurasjon
+
+**Terraform-kode:**
+
+Oppsett av Lambda-funksjon med SQS-integrasjon.
+Opprettet SQS-kø merket med kandidatnummer:
+pgr301-couch-explorers-queue-83
+Nødvendige IAM-roller for Lambda-funksjonen.
+Terraform State-fil lagres i S3-bucket:
+pgr301-2024-terraform-state.
+Terraform konfigurert til versjon >1.9 og AWS-provider versjon 5.74.0.
+
+**Testing:**
+
+Meldinger sendes via SQS til Lambda.
+Lambda-funksjon mottar meldinger fra køen og behandler dem, med logging i CloudWatch.
+Output lagres i S3 i samme struktur som SAM-applikasjonen:
+s3://pgr301-couch-explorers/83/
+
+## Oppgave 2B: GitHub Actions Workflow for Terraform
+
+**GitHub Actions for Terraform Deployment:**
+
+Opprettet en workflow (.github/workflows/terraform_deploy.yml) som håndterer deploy av infrastrukturen ved å kjøre Terraform-kommandoer.
+
+Branch-spesifik oppførsel:
+1. Main-branch:
+    - Workflow kjører terraform apply for å oppdatere infrastrukturen med endringer.
+2. Andre brancher:
+    - Workflow kjører terraform plan for å vise en plan for hvilke endringer som ville blitt gjort.
+
+**Beskrivelse av Workflow:**
+
+**Setup:**
+-   Installerer Terraform og konfigurerer AWS Credentials.
+**Terraform Init:**
+-   Initialiserer Terraform-konfigurasjonen.
+**Terraform Plan/Apply:**
+-   Utfører den relevante Terraform-kommandoen basert på branchen.
+**Filbane for Workflow:**
+
+.github/workflows/terraform_deploy.yml
+
+Lenke til vellykket Terraform GitHub Actions Workflow:
+- https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11950004111 (Main branch)
+- https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11950096849 (Test-branch)
