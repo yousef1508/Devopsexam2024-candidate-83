@@ -63,3 +63,6 @@ resource "aws_lambda_event_source_mapping" "sqs_to_lambda" {
   function_name    = aws_lambda_function.sqs_processor.arn
   batch_size       = 5
 }
+
+
+# This is a test branch for Terraform workflow logic
