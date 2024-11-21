@@ -267,18 +267,8 @@ Thumbs.db
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
 
-# Ignore Terraform local state files
-*.tfstate
-*.tfstate.*
-
-# Ignore Terraform crash logs
-crash.log
-
-# Ignore Terraform execution plan files
-*.tfplan
-
-# Ignore Terraform module downloads
 .terraform/
-
-# Ignore ZIP files
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
 *.zip
