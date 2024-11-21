@@ -31,13 +31,13 @@ jobs:
 
       # Step 4: Initialize Terraform
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -chdir=terraform_sqs_lambda # Update to your Terraform directory
 
       # Step 5: Branch-specific behavior
       - name: Terraform Plan or Apply
         run: |
           if [[ "${{ github.ref_name }}" == "main" ]]; then
-            terraform apply -auto-approve
+            terraform apply -auto-approve -chdir=terraform_sqs_lambda # Update to your Terraform directory
           else
-            terraform plan
+            terraform plan -chdir=terraform_sqs_lambda # Update to your Terraform directory
           fi
