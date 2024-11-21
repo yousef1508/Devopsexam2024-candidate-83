@@ -50,3 +50,6 @@ Filbane for Workflow:
 .github/workflows/deploy_lambda.yml
 **Trigger:**
 Workflow trigges automatisk ved push til main-grenen.
+
+**Lenke til kjørt GitHub Actions workflow:**
+https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11946931320
