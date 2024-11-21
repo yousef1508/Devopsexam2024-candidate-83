@@ -1,42 +1,47 @@
 import json
+import boto3
+import os
+import uuid
 
-# import requests
-
+# Initialize the S3 client
+s3 = boto3.client('s3')
 
 def lambda_handler(event, context):
-    """Sample pure Lambda function
+    try:
+        # Fetch bucket name and candidate ID from environment variables
+        bucket_name = os.environ['BUCKET_NAME']
+        candidate_id = os.environ['CANDIDATE_ID']
 
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
+        # Parse the input payload
+        body = json.loads(event['body'])
+        prompt = body.get('prompt', 'Default prompt')
 
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
+        # Simulate content generation
+        generated_content = f"Generated content for prompt: {prompt}"
 
-    context: object, required
-        Lambda Context runtime methods and attributes
+        # Generate a unique file name
+        file_name = f"{candidate_id}/{uuid.uuid4()}.txt"
 
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
+        # Upload the generated content to S3
+        s3.put_object(
+            Bucket=bucket_name,
+            Key=file_name,
+            Body=generated_content
+        )
 
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
-
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-    """
-
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
-
-    #     raise e
-
-    return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
-    }
+        # Return success response
+        return {
+            "statusCode": 200,
+            "body": json.dumps({
+                "message": "File uploaded successfully",
+                "file_key": file_name
+            })
+        }
+    except Exception as e:
+        # Handle errors and return failure response
+        return {
+            "statusCode": 500,
+            "body": json.dumps({
+                "error": str(e)
+            })
+        }

@@ -3,43 +3,53 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   sam_lambda_project
 
-  Sample SAM Template for sam_lambda_project
+  Lambda function to process input, generate content, and upload to S3.
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 10
     MemorySize: 128
-
-    # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
     LoggingConfig:
       LogFormat: JSON
+
 Resources:
   HelloWorldFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: hello_world/
       Handler: app.lambda_handler
       Runtime: python3.9
       Architectures:
-      - x86_64
+        - x86_64
+      Environment:
+        Variables:
+          BUCKET_NAME: pgr301-couch-explorers
+          CANDIDATE_ID: "83"
+      Policies:
+        - S3CrudPolicy:
+            BucketName: pgr301-couch-explorers
       Events:
-        HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+        GenerateContentApi:
+          Type: Api
           Properties:
-            Path: /hello
-            Method: get
+            RestApiId: !Ref MyRegionalRestApi  # Updated ID reference
+            Path: /generate
+            Method: post
+
+  MyRegionalRestApi:  # Updated logical ID
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: MyRegionalApi
+      StageName: Prod
+      EndpointConfiguration: REGIONAL
 
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   HelloWorldApi:
-    Description: API Gateway endpoint URL for Prod stage for Hello World function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Description: API Gateway endpoint URL for Prod stage
+    Value: !Sub "https://${MyRegionalRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/generate/"
   HelloWorldFunction:
-    Description: Hello World Lambda Function ARN
+    Description: Lambda Function ARN
     Value: !GetAtt HelloWorldFunction.Arn
   HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
+    Description: Implicit IAM Role created for the Lambda function
     Value: !GetAtt HelloWorldFunctionRole.Arn

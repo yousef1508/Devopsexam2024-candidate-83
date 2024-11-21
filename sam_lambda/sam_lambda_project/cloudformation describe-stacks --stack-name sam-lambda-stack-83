@@ -1,0 +1,25 @@
+{
+    "Stacks": [
+        {
+            "StackId": "arn:aws:cloudformation:eu-west-1:244530008913:stack/sam-lambda-stack-83/54a8c870-a704-11ef-b86c-06d7d1a5f923",
+            "StackName": "sam-lambda-stack-83",
+            "Description": "sam_lambda_project\nLambda function to process input, generate content, and upload to S3.\n",
+            "CreationTime": "2024-11-20T05:57:31.454000+00:00",
+            "DeletionTime": "2024-11-20T05:58:35.091000+00:00",
+            "LastUpdatedTime": "2024-11-20T05:58:06.604000+00:00",
+            "RollbackConfiguration": {},
+            "StackStatus": "DELETE_IN_PROGRESS",
+            "StackStatusReason": "User Initiated",
+            "DisableRollback": false,
+            "NotificationARNs": [],
+            "Capabilities": [
+                "CAPABILITY_IAM"
+            ],
+            "Tags": [],
+            "EnableTerminationProtection": false,
+            "DriftInformation": {
+                "StackDriftStatus": "NOT_CHECKED"
+            }
+        }
+    ]
+}
