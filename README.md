@@ -11,7 +11,6 @@ https://aj9pvletme.execute-api.eu-west-1.amazonaws.com/Prod/generate/
 
 
 - **Eksempel på S3-filbane**:  
-Inkluder en eksempelsti for en opplastet fil i S3-bøtta:  
-s3://pgr301-couch-explorers/83/<filnavn>.txt
+s3://pgr301-couch-explorers/83/<unikt-filnavn>.txt
 Eller bruk en faktisk filsti fra eksisterende filer i bucketen, denne har jeg allerede generert for eksempel:  
 s3://pgr301-couch-explorers/83/06148839-6bd5-4dbc-8dae-fc8697732dba.txt
