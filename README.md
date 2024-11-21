@@ -6,15 +6,32 @@
 - **SAM-deployment**: Verifisert og funksjonell.
 
 ## Oppgave 1A:
-- **API Gateway URL**:  
-https://aj9pvletme.execute-api.eu-west-1.amazonaws.com/Prod/generate/
+Oppgave 1A: Dokumentasjon
+API Gateway URL:
+**https://aj9pvletme.execute-api.eu-west-1.amazonaws.com/Prod/generate/**
+
+Eksempel på Payload (POST):
 
 
-- **Eksempel på S3-filbane**:  
+{
+    "prompt": "Test content generation"
+}
+
+**Eksempel på S3-filbane:**
+
+
 s3://pgr301-couch-explorers/83/<unikt-filnavn>.txt
-Eller bruk en faktisk filsti fra eksisterende filer i bucketen, denne har jeg allerede generert for eksempel:  
-s3://pgr301-couch-explorers/83/06148839-6bd5-4dbc-8dae-fc8697732dba.txt
-har testet sam Local invoke (I build fasen før deploy), Curl (etter sam Deploy --guided) og Postman
+**Eksempel fra testing:**
+
+
+**s3://pgr301-couch-explorers/83/06148839-6bd5-4dbc-8dae-fc8697732dba.txt**
+
+**Testmetoder brukt:**
+
+SAM Local: Verifisert under build-fasen (sam local invoke) med event-payloads.
+cURL: Testet API Gateway etter deployment.
+Postman: Testet API-funksjonalitet med JSON-payload.
+
 
 ## Oppgave 1B: GitHub Actions Workflow
 GitHub Actions for Deployment:
