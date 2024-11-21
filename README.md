@@ -14,3 +14,4 @@ https://aj9pvletme.execute-api.eu-west-1.amazonaws.com/Prod/generate/
 s3://pgr301-couch-explorers/83/<unikt-filnavn>.txt
 Eller bruk en faktisk filsti fra eksisterende filer i bucketen, denne har jeg allerede generert for eksempel:  
 s3://pgr301-couch-explorers/83/06148839-6bd5-4dbc-8dae-fc8697732dba.txt
+har testet sam Local invoke (I build fasen før deploy), Curl (etter sam Deploy --guided) og Postman
