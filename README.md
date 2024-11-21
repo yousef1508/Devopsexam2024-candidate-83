@@ -20,7 +20,9 @@ Eksempel på Payload (POST):
 **Eksempel på S3-filbane:**
 
 
-s3://pgr301-couch-explorers/83/<unikt-filnavn>.txt
+s3://pgr301-couch-explorers/83/<unikt-filnavn>.txt 
+
+
 **Eksempel fra testing:**
 
 
