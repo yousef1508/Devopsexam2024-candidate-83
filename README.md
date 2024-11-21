@@ -24,7 +24,7 @@ s3://pgr301-couch-explorers/83/<unikt-filnavn>.txt
 **Eksempel fra testing:**
 
 
-**s3://pgr301-couch-explorers/83/06148839-6bd5-4dbc-8dae-fc8697732dba.txt**
+**s3://pgr301-couch-explorers/83/2352ef88-ced6-4d44-b08f-0c3e5d95de3d.txt**
 
 **Testmetoder brukt:**
 
@@ -51,5 +51,5 @@ Filbane for Workflow:
 **Trigger:**
 Workflow trigges automatisk ved push til main-grenen.
 
-**Lenke til kjørt GitHub Actions workflow:**
+**Lenke til vellyket kjørt GitHub Actions workflow:**
 https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11946931320
