@@ -40,3 +40,4 @@ jobs:
             terraform apply -auto-approve
           else
             terraform plan
+          fi
