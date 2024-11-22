@@ -24,14 +24,17 @@ jobs:
         run: |
           pip install aws-sam-cli
 
-      # Cleanup previous SAM stack if needed
-      - name: Cleanup Previous SAM Stack
+      # Cleanup previous SAM stack only if necessary
+      - name: Cleanup Previous SAM Stack (Only if Necessary)
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          aws cloudformation delete-stack --stack-name sam-lambda-stack-83 --region eu-west-1 || true
-          aws cloudformation wait stack-delete-complete --stack-name sam-lambda-stack-83 --region eu-west-1 || true
+          STACK_STATUS=$(aws cloudformation describe-stacks --stack-name sam-lambda-stack-83 --query 'Stacks[0].StackStatus' --output text --region eu-west-1 || echo "NOT_FOUND")
+          if [[ "$STACK_STATUS" == "ROLLBACK_COMPLETE" || "$STACK_STATUS" == "DELETE_FAILED" ]]; then
+            aws cloudformation delete-stack --stack-name sam-lambda-stack-83 --region eu-west-1
+            aws cloudformation wait stack-delete-complete --stack-name sam-lambda-stack-83 --region eu-west-1
+          fi
 
       # Build the SAM Application
       - name: Build SAM Application
