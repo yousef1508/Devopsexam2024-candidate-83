@@ -13,11 +13,20 @@ Globals:
       LogFormat: JSON
 
 Resources:
+  # Define API Gateway first
+  MyRegionalRestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: MyRegionalApi-cand-83
+      StageName: Prod
+      EndpointConfiguration: REGIONAL
+
+  # Define Lambda Function
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: image_generator/
-      Handler: generate_image.lambda_handler  # Updated handler
+      Handler: generate_image.lambda_handler
       Runtime: python3.9
       Architectures:
         - x86_64
@@ -41,15 +50,6 @@ Resources:
             RestApiId: !Ref MyRegionalRestApi
             Path: /generate
             Method: post
-
-MyRegionalRestApi:
-  Type: AWS::Serverless::Api
-  Properties:
-    Name: MyRegionalApi-cand-83
-    StageName: Prod
-    EndpointConfiguration: REGIONAL
-  DeletionPolicy: Retain
-
 
 Outputs:
   HelloWorldApi:

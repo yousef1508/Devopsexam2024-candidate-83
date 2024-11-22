@@ -24,22 +24,10 @@ jobs:
         run: |
           pip install aws-sam-cli
 
-      # Cleanup previous SAM stack only if necessary
-      - name: Cleanup Previous SAM Stack (Only if Necessary)
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          STACK_STATUS=$(aws cloudformation describe-stacks --stack-name sam-lambda-stack-83 --query 'Stacks[0].StackStatus' --output text --region eu-west-1 || echo "NOT_FOUND")
-          if [[ "$STACK_STATUS" == "ROLLBACK_COMPLETE" || "$STACK_STATUS" == "DELETE_FAILED" ]]; then
-            aws cloudformation delete-stack --stack-name sam-lambda-stack-83 --region eu-west-1
-            aws cloudformation wait stack-delete-complete --stack-name sam-lambda-stack-83 --region eu-west-1
-          fi
-
       # Build the SAM Application
       - name: Build SAM Application
         run: |
-          sam build --template-file sam_lambda/sam_lambda_project/template.yaml
+          sam build --template-file sam_lambda_project/template.yaml
 
       # Deploy the SAM Application
       - name: Deploy SAM Application
@@ -47,4 +35,4 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          sam deploy --no-confirm-changeset --stack-name sam-lambda-stack-83 --region eu-west-1 --capabilities CAPABILITY_IAM --resolve-s3
+          sam deploy --no-confirm-changeset --template-file sam_lambda_project/template.yaml --stack-name sam-lambda-stack-83 --region eu-west-1 --capabilities CAPABILITY_IAM --resolve-s3
