@@ -1,7 +1,7 @@
 ## Deliverables
 
 ### Task 1
-- **HTTP Endpoint for Lambda Function:** [https://pi2yxj62pa.execute-api.eu-west-1.amazonaws.com/Prod/generate](https://pi2yxj62pa.execute-api.eu-west-1.amazonaws.com/Prod/generate)
+- **HTTP Endpoint for Lambda Function:** [https://z0r03zhlo5.execute-api.eu-west-1.amazonaws.com/Prod/generate](https://z0r03zhlo5.execute-api.eu-west-1.amazonaws.com/Prod/generate)
 - **GitHub Actions Workflow Run:** [Link to GitHub Actions Workflow](https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11965040171/job/33358378685)
 
 ### Example Prompt
