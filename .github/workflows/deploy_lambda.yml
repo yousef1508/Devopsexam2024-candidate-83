@@ -21,6 +21,14 @@ jobs:
         run: |
           pip install aws-sam-cli
 
+      # Optional Cleanup Step
+      - name: Cleanup Previous SAM Stack
+        env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws cloudformation delete-stack --stack-name sam-lambda-stack-83 --region eu-west-1 || true
+
       - name: Build SAM Application
         run: |
           sam build --template-file sam_lambda/sam_lambda_project/template.yaml

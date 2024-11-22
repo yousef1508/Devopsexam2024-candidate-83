@@ -3,9 +3,11 @@ provider "aws" {
 }
 
 terraform {
+  required_version = ">= 1.9.0"
+
   backend "s3" {
-    bucket         = "pgr301-couch-explorers"
-    key            = "terraform/sqs-lambda/terraform.tfstate"
+    bucket         = "pgr301-2024-terraform-state"
+    key            = "83/terraform.tfstate"
     region         = "eu-west-1"
     encrypt        = true
   }
