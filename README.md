@@ -1,106 +1,14 @@
-# Oppsummering av Leveranser for Oppgave 1 (SAM + API Gateway)
+## Deliverables
 
-## Implementerte Funksjoner:
-- **Lambda-funksjon**: Tar imot input fra API Gateway og laster opp til S3.
-- **POST API-endepunkt**: Konfigurert og testet ved bruk av `/generate`.
-- **SAM-deployment**: Verifisert og funksjonell.
+### Task 1
+- **HTTP Endpoint for Lambda Function:** [https://pi2yxj62pa.execute-api.eu-west-1.amazonaws.com/Prod/generate](https://pi2yxj62pa.execute-api.eu-west-1.amazonaws.com/Prod/generate)
+- **GitHub Actions Workflow Run:** [Link to GitHub Actions Workflow](https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11965040171/job/33358378685)
 
-## Oppgave 1A:
-Oppgave 1A: Dokumentasjon
-API Gateway URL:
-**https://aj9pvletme.execute-api.eu-west-1.amazonaws.com/Prod/generate/**
+### Example Prompt
+To test the HTTP Endpoint, you can use the following example prompt in Postman or `curl`:
 
-Eksempel på Payload (POST):
-
-
+**Prompt:**
+```json
 {
-    "prompt": "Test content generation"
+  "prompt": "Show me sitting at a classic Parisian café with the Eiffel Tower in the background."
 }
-
-**Eksempel på S3-filbane:**
-
-
-s3://pgr301-couch-explorers/83/<unikt-filnavn>.txt 
-
-
-**Eksempel fra testing:**
-
-
-**s3://pgr301-couch-explorers/83/2352ef88-ced6-4d44-b08f-0c3e5d95de3d.txt**
-
-**Testmetoder brukt:**
-
-SAM Local: Verifisert under build-fasen (sam local invoke) med event-payloads.
-cURL: Testet API Gateway etter deployment.
-Postman: Testet API-funksjonalitet med JSON-payload.
-
-
-## Oppgave 1B: GitHub Actions Workflow
-GitHub Actions for Deployment:
-Workflow-filen (.github/workflows/deploy_lambda.yml) håndterer automatisk bygging og deployering av Lambda-funksjonen ved bruk av AWS SAM CLI. Deployment trigges automatisk ved hver commit til main-grenen.
-
-**AWS Credentials:**
-AWS Access Key ID og Secret Access Key er konfigurert som hemmeligheter i GitHub (AWS_ACCESS_KEY_ID og AWS_SECRET_ACCESS_KEY) for sikker tilgang.
-
-**Beskrivelse av Workflow:**
-
-Installer Python og SAM CLI: Sikrer at nødvendig miljø er satt opp.
-Bygg SAM-applikasjonen: Kjører sam build for å forberede funksjonen.
-Deploy SAM-applikasjonen: Kjører sam deploy --no-confirm-changeset for å oppdatere Lambda-funksjonen i skyen.
-Filbane for Workflow:
-
-.github/workflows/deploy_lambda.yml
-**Trigger:**
-Workflow trigges automatisk ved push til main-grenen.
-
-**Lenke til vellyket kjørt GitHub Actions workflow:**
-https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11946931320
-
-
-# Oppgave 2: Terraform - Infrastruktur som kode
-## Oppgave 2A: Konfigurasjon
-
-**Terraform-kode:**
-
-Oppsett av Lambda-funksjon med SQS-integrasjon.
-Opprettet SQS-kø merket med kandidatnummer:
-pgr301-couch-explorers-queue-83
-Nødvendige IAM-roller for Lambda-funksjonen.
-Terraform State-fil lagres i S3-bucket:
-pgr301-2024-terraform-state.
-Terraform konfigurert til versjon >1.9 og AWS-provider versjon 5.74.0.
-
-**Testing:**
-
-Meldinger sendes via SQS til Lambda.
-Lambda-funksjon mottar meldinger fra køen og behandler dem, med logging i CloudWatch.
-Output lagres i S3 i samme struktur som SAM-applikasjonen:
-s3://pgr301-couch-explorers/83/
-
-## Oppgave 2B: GitHub Actions Workflow for Terraform
-
-**GitHub Actions for Terraform Deployment:**
-
-Opprettet en workflow (.github/workflows/terraform_deploy.yml) som håndterer deploy av infrastrukturen ved å kjøre Terraform-kommandoer.
-
-Branch-spesifik oppførsel:
-1. Main-branch:
-    - Workflow kjører terraform apply for å oppdatere infrastrukturen med endringer.
-2. Andre brancher:
-    - Workflow kjører terraform plan for å vise en plan for hvilke endringer som ville blitt gjort.
-
-**Beskrivelse av Workflow:**
-
-**Setup:**
--   Installerer Terraform og konfigurerer AWS Credentials.
-**Terraform Init:**
--   Initialiserer Terraform-konfigurasjonen.
-**Terraform Plan/Apply:**
--   Utfører den relevante Terraform-kommandoen basert på branchen.
-**Filbane for Workflow:**
-
-.github/workflows/terraform_deploy.yml
-
-Lenke til vellykket Terraform GitHub Actions Workflow:
-- https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11950004111 (Main branch)
-- https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11950096849 (Test-branch)
