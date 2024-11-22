@@ -42,12 +42,14 @@ Resources:
             Path: /generate
             Method: post
 
-  MyRegionalRestApi:
-    Type: AWS::Serverless::Api
-    Properties:
-      Name: MyRegionalApi-cand-83
-      StageName: Prod
-      EndpointConfiguration: REGIONAL
+MyRegionalRestApi:
+  Type: AWS::Serverless::Api
+  Properties:
+    Name: MyRegionalApi-cand-83
+    StageName: Prod
+    EndpointConfiguration: REGIONAL
+  DeletionPolicy: Retain
+
 
 Outputs:
   HelloWorldApi:
