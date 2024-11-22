@@ -9,33 +9,39 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      # Set up Python environment
       - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
+      # Install the AWS SAM CLI
       - name: Install AWS SAM CLI
         run: |
           pip install aws-sam-cli
 
-      # Optional Cleanup Step
+      # Cleanup previous SAM stack if needed
       - name: Cleanup Previous SAM Stack
         env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           aws cloudformation delete-stack --stack-name sam-lambda-stack-83 --region eu-west-1 || true
+          aws cloudformation wait stack-delete-complete --stack-name sam-lambda-stack-83 --region eu-west-1 || true
 
+      # Build the SAM Application
       - name: Build SAM Application
         run: |
           sam build --template-file sam_lambda/sam_lambda_project/template.yaml
 
+      # Deploy the SAM Application
       - name: Deploy SAM Application
         env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          sam deploy --no-confirm-changeset --stack-name sam-lambda-stack-83 --region eu-west-1 --capabilities CAPABILITY_IAM --resolve-s3 || true
+          sam deploy --no-confirm-changeset --stack-name sam-lambda-stack-83 --region eu-west-1 --capabilities CAPABILITY_IAM --resolve-s3
