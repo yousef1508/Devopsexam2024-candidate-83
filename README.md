@@ -1,6 +1,6 @@
 ## Deliverables
 
-### Task 1
+### Oppgave 1
 
  ### 1A
 
@@ -26,7 +26,8 @@ For å teste HTTP-endepunktet kan du bruke følgende eksempel i Postman eller `c
 
 ---
 
-### Task 2
+### Oppgave 2
+
  ###2A 
 
 
@@ -53,3 +54,38 @@ For å teste HTTP-endepunktet kan du bruke følgende eksempel i Postman eller `c
 
 
 ---
+
+### Oppgave 3
+
+### 3A: Lage en docker fil
+
+Dockerfilen bruker en flertrinns strategi:
+bygger appen med Maven og lager et kompakt kjøretidsbilde med (`eclipse-temurin:17-jre`)
+Dette sikrer at det er kompakt og effektivit. 
+
+### 3B
+Jeg valgte å bruke latest-taggen for Docker-imaget. 
+Grunnen er ganske enkel: det gjør alt mye mer praktisk. 
+Når noen trekker ned imaget fra Docker Hub, får de alltid den nyeste og mest oppdaterte versjonen uten å måtte bekymre seg for detaljer. 
+Selvfølgelig, i fremtiden, hvis det er behov for flere versjoner eller sikre kompatibilitet,
+kunne jeg ha lagt til til spesifikke versjonstags.
+Men akkurat nå fungerer det best å holde det enkelt og oversiktlig, som samt svarer på 3b fullt fra mitt perspektiv.
+
+
+**Contianer Image name og Sqs url**
+container Image name
+
+`yousef1508/java-sqs-client`
+
+- **SQS Queue URL:**  
+  [https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83](https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83)
+
+
+**instruksjoner:**
+
+docker pull yousef1508/java-sqs-client:latest
+
+docker run -e AWS_ACCESS_KEY_ID=<din-aws-access-key> \
+           -e AWS_SECRET_ACCESS_KEY=<din-aws-secret-key> \
+           -e SQS_QUEUE_URL=https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83 \
+           yousef1508/java-sqs-client:latest "Din melding her"
