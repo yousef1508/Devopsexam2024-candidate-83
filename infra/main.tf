@@ -20,7 +20,7 @@ provider "aws" {
 }
 
 resource "aws_sqs_queue" "image_requests" {
-  name                      = "image-generation-queue"
+  name                      = "image-generation-queue-cand83"
   visibility_timeout_seconds = 30
 }
 
@@ -39,43 +39,44 @@ resource "aws_iam_role" "lambda_execution_role" {
       }
     ]
   })
+}
 
-  inline_policy {
-    name   = "lambda-sqs-policy"
-    policy = jsonencode({
-      Version = "2012-10-17"
-      Statement = [
-        {
-          Effect   = "Allow"
-          Action   = [
-            "sqs:ReceiveMessage",
-            "sqs:DeleteMessage",
-            "sqs:GetQueueAttributes"
-          ]
-          Resource = aws_sqs_queue.image_requests.arn
-        },
-        {
-          Effect   = "Allow"
-          Action   = "s3:PutObject"
-          Resource = "arn:aws:s3:::pgr301-couch-explorers/*"
-        },
-        {
-          Effect   = "Allow"
-          Action   = "logs:*"
-          Resource = "arn:aws:logs:*:*:*"
-        },
-        {
-          Effect   = "Allow"
-          Action   = "bedrock:InvokeModel"
-          Resource = "arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-image-generator-v1"
-        }
-      ]
-    })
-  }
+resource "aws_iam_role_policy" "lambda_policy" {
+  name   = "lambda-sqs-policy"
+  role   = aws_iam_role.lambda_execution_role.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes"
+        ]
+        Resource = aws_sqs_queue.image_requests.arn
+      },
+      {
+        Effect   = "Allow"
+        Action   = "s3:PutObject"
+        Resource = "arn:aws:s3:::pgr301-couch-explorers/*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = "logs:*"
+        Resource = "arn:aws:logs:*:*:*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = "bedrock:InvokeModel"
+        Resource = "arn:aws:bedrock:us-east-1::foundation-model/amazon.titan-image-generator-v1"
+      }
+    ]
+  })
 }
 
 resource "aws_lambda_function" "sqs_lambda" {
-  filename         = "${path.module}/lambda/lambda_sqs.py.zip"
+  filename         = "${path.module}/lambda_sqs.py.zip"
   function_name    = "sqs-image-generator"
   role             = aws_iam_role.lambda_execution_role.arn
   handler          = "lambda_sqs.lambda_handler"
@@ -83,13 +84,15 @@ resource "aws_lambda_function" "sqs_lambda" {
   timeout          = 30
   memory_size      = 128
 
-  environment {
-    variables = {
-      BUCKET_NAME = "pgr301-couch-explorers"
-    }
+environment {
+  variables = {
+    BUCKET_NAME  = "pgr301-couch-explorers"
+    CANDIDATE_ID = "83"
   }
+}
 
-  source_code_hash = filebase64sha256("${path.module}/lambda/lambda_sqs.py.zip")
+
+  source_code_hash = filebase64sha256("${path.module}/lambda_sqs.py.zip")
 }
 
 resource "aws_lambda_event_source_mapping" "sqs_event_source" {

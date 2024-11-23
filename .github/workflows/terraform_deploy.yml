@@ -32,13 +32,17 @@ jobs:
       # Step 4: Initialize Terraform
       - name: Terraform Init
         run: |
-          cd terraform_sqs_lambda
-          terraform init
+          cd infra
+          terraform init \
+          -backend-config="bucket=pgr301-2024-terraform-state" \
+          -backend-config="key=infra/terraform.tfstate" \
+          -backend-config="region=eu-west-1" \
+          -backend-config="encrypt=true"
 
-      # Step 5: Branch-specific behavior
+      # Step 5: Terraform Plan or Apply
       - name: Terraform Plan or Apply
         run: |
-          cd terraform_sqs_lambda
+          cd infra
           if [[ "${{ github.ref_name }}" == "main" ]]; then
             terraform apply -auto-approve
           else

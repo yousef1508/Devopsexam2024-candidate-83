@@ -16,3 +16,10 @@ To test the HTTP Endpoint, you can use the following example prompt in Postman o
 ```
 
 ---
+
+### Task 2
+- ###2A 
+
+- **Lambda Function Name:** `sqs-image-generator`
+- **sqs_queue_arn:** "arn:aws:sqs:eu-west-1:244530008913:image-generation-queue-cand83"
+- **sqs_queue_url:** "https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83"
