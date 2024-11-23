@@ -25,7 +25,7 @@ jobs:
       # Step 3: Build the Docker image
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/java-sqs-client:latest .
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/java-sqs-client:latest ./java_sqs_client
 
       # Step 4: Push the Docker image
       - name: Push Docker Image
