@@ -35,8 +35,14 @@ jobs:
           cd infra
           terraform init
 
-      # Step 5: Branch-specific behavior
-      - name: Branch-Specific Terraform Actions
+      # Step 5: Create the Lambda zip file
+      - name: Zip Lambda Function
+        run: |
+          cd infra
+          zip lambda_sqs.py.zip lambda_sqs.py
+
+      # Step 6: Branch-specific behavior
+      - name: Terraform Plan or Apply
         run: |
           cd infra
           if [[ "${{ github.ref_name }}" == "main" ]]; then
@@ -46,5 +52,3 @@ jobs:
             echo "Running terraform plan on non-main branch"
             terraform plan
           fi
-        env:
-          TF_LOG: "INFO"
