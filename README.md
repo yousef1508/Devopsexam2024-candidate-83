@@ -20,7 +20,7 @@ To test the HTTP Endpoint, you can use the following example prompt in Postman o
 **Prompt:**
 ```json
 {
-  "prompt": "Show me sitting at a classic Parisian café with the Eiffel Tower in the background"
+  "prompt": "Place me in a jeep on an African savanna with lions and elephants in the background under a golden sunset."
 }
 ```
 
@@ -38,13 +38,13 @@ To test the HTTP Endpoint, you can use the following example prompt in Postman o
 
 - ###2B
 
-- **Link to a running GitHub Actions workflow (Main Branch)**:  
+- **Link til en vellykket GitHub Actions workflow (Main Branch):**  
   [![GitHub Actions Workflow - Main Branch](https://img.shields.io/badge/GitHub-Actions--Workflow--Main-brightgreen)](https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986740646)  
   URL: [https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986740646](https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986740646)
 
-- **Link to a working GitHub Actions workflow (Non-Main Branch)**:  
-  [![GitHub Actions Workflow - Non-Main Branch](https://img.shields.io/badge/GitHub-Actions--Workflow--Non--Main-brightgreen)](https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986726072/job/33420081991)  
-  URL: [https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986726072/job/33420081991](https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986726072/job/33420081991)
+- **Link til en vellykket GitHub Actions workflow (Ikke-main Branch):**
+ [![GitHub Actions Workflow - Non-Main Branch](https://img.shields.io/badge/GitHub-Actions--Workflow--Non--Main-brightgreen)](https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986726072)  
+  URL: [https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986726072](https://github.com/yousef1508/Devopsexam2024Yoas001/actions/runs/11986726072)
 
 
 ---
