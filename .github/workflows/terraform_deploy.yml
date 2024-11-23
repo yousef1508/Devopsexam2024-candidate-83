@@ -45,5 +45,6 @@ jobs:
           else
             echo "Running terraform plan on non-main branch"
             terraform plan
+          fi
         env:
           TF_LOG: "INFO"
