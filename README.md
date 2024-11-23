@@ -2,7 +2,7 @@
 
 ### Task 1
 
-- ### 1A
+ ### 1A
 
 - **HTTP Endpoint for Lambda Function:**  
   URL: [https://j983bpau2h.execute-api.eu-west-1.amazonaws.com/Prod/generate](https://j983bpau2h.execute-api.eu-west-1.amazonaws.com/Prod/generate)
@@ -27,7 +27,7 @@ For å teste HTTP-endepunktet kan du bruke følgende eksempel i Postman eller `c
 ---
 
 ### Task 2
-- ###2A 
+ ###2A 
 
 
 - **Lambda Function Name:** `sqs-image-generator`
@@ -36,7 +36,7 @@ For å teste HTTP-endepunktet kan du bruke følgende eksempel i Postman eller `c
  - **SQS Queue URL**:  
   URL: [https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83](https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83)
 
-- ###2B
+###2B
 
 - **Link til en vellykket GitHub Actions workflow (Main Branch):**  
 
