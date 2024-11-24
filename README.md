@@ -113,7 +113,7 @@ Implementert **CloudWatch Alarm** for å overvåke SQS-forsinkelser og sende e-p
 ---
 
 
-### Osppgave 5: Serverless, Function-as-a-Service vs. Container Technology
+### Oppgave 5: Serverless, Function-as-a-Service vs. Container Technology
 
 Implementering av systemer med serverløs arkitektur, som AWS Lambda og SQS, kontra en mer tradisjonell mikrotjenestearkitektur, er et ganske heftig tema. Begge tilnærmingene har styrker og svakheter, og hva som fungerer best kommer helt an på brukstilfellet. Her skal jeg bryte det ned basert på fire DevOps-prinsipper: Automatisering og CI/CD, Observabilitet, Skalerbarhet og kostnadskontroll, og til slutt Eiendomsrett og ansvar.
 
@@ -151,26 +151,3 @@ Alt er ditt ansvar. Dette kan være både bra og dårlig. Du har full kontroll, 
 
 ### Konklusjon
 Valget mellom serverløst og mikrotjenester handler om prioriteringer. Serverløst gir deg fart og fleksibilitet, mens mikrotjenester gir deg kontroll og stabilitet. For applikasjoner med uforutsigbare arbeidsmengder eller strenge budsjettkrav kan serverløst være et fantastisk valg. Men hvis du trenger langvarig kontroll og kompleks funksjonalitet, er mikrotjenester kanskje mer din greie.
-
-### Kilder
-
-
-1. **Glenn Bech - Forelesninger i PGR301**  
-   Bech, G. (2024). *PGR301: DevOps prinsipper og praksis*.  
-   Forelesningsmateriale, Høyskolen Kristiania, Oslo, Norge.
-
-2. **AWS Lambda Documentation**  
-   Amazon Web Services. (n.d.). *AWS Lambda Developer Guide*.  
-   [https://docs.aws.amazon.com/lambda/index.html](https://docs.aws.amazon.com/lambda/index.html)
-
-3. **Serverless Framework Documentation**  
-   Serverless, Inc. (n.d.). *Serverless Framework Documentation*.  
-   [https://www.serverless.com/framework/docs](https://www.serverless.com/framework/docs)
-
-4. **Kubernetes Documentation**  
-   Cloud Native Computing Foundation. (n.d.). *Kubernetes Concepts Overview*.  
-   [https://kubernetes.io/docs/concepts/overview/](https://kubernetes.io/docs/concepts/overview/)
-
-5. **Prometheus Monitoring Documentation**  
-   Prometheus. (n.d.). *Introduction to Prometheus*.  
-   [https://prometheus.io/docs/introduction/overview/](https://prometheus.io/docs/introduction/overview/)
