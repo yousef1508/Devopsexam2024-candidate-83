@@ -101,3 +101,32 @@ resource "aws_lambda_event_source_mapping" "sqs_event_source" {
   batch_size        = 10
   enabled           = true
 }
+
+# SNS Topic for alarm notifications
+resource "aws_sns_topic" "sqs_alarm_topic" {
+  name = "sqs-alarm-cand83"
+}
+
+# Email subscription for the SNS Topic
+resource "aws_sns_topic_subscription" "sqs_alarm_email_subscription" {
+  topic_arn = aws_sns_topic.sqs_alarm_topic.arn
+  protocol  = "email"
+  endpoint  = var.alarm_email
+}
+
+# CloudWatch alarm for monitoring ApproximateAgeOfOldestMessage
+resource "aws_cloudwatch_metric_alarm" "sqs_oldest_message_alarm" {
+  alarm_name          = "SQS_OldestMessage_Age_Alarm-cand83"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
+  metric_name         = "ApproximateAgeOfOldestMessage"
+  namespace           = "AWS/SQS"
+  period              = 60
+  statistic           = "Average"
+  threshold           = var.alarm_threshold  
+  alarm_description   = "Triggers if the oldest message in the SQS queue exceeds the defined threshold."
+  dimensions = {
+    QueueName = aws_sqs_queue.image_requests.name
+  }
+  alarm_actions = [aws_sns_topic.sqs_alarm_topic.arn]
+}
