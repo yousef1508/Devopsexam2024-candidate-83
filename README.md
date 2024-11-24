@@ -104,7 +104,7 @@ Implementert **CloudWatch Alarm** for å overvåke SQS-forsinkelser og sende e-p
 - **CloudWatch Alarm**: Utløses hvis den eldste meldingen i SQS-køen overskrider terskelen.
 - **SNS-Notifications**: Sender e-postvarsler til den angitte adressen (i sns topicen `sqs-alarm-cand83`).
 
-### How to Test
+### Hvordan teste
 1. Send en delayed melding:
    ```bash
     aws sqs send-message --queue-url https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83 --message-body "Delayed Test Message" --delay-seconds 68 
