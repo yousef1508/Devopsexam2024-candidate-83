@@ -1,4 +1,4 @@
-## Deliverables
+## Leveranser:
 
 ### Oppgave 1
 
