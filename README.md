@@ -151,3 +151,4 @@ Alt er ditt ansvar. Dette kan være både bra og dårlig. Du har full kontroll, 
 
 ### Konklusjon
 Valget mellom serverløst og mikrotjenester handler om prioriteringer. Serverløst gir deg fart og fleksibilitet, mens mikrotjenester gir deg kontroll og stabilitet. For applikasjoner med uforutsigbare arbeidsmengder eller strenge budsjettkrav kan serverløst være et fantastisk valg. Men hvis du trenger langvarig kontroll og kompleks funksjonalitet, er mikrotjenester kanskje mer din greie.
+
