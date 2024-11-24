@@ -119,9 +119,7 @@ Implementering av systemer med serverløs arkitektur, som AWS Lambda og SQS, kon
 
 #### 1. **Automatisering og CI/CD**
 - **Serverløs arkitektur**
- Serverløse løsninger gjør distribusjon vanvittig effektivt. Her snakker vi om små, selvstendige funksjoner som kan pushes til skyen på sekunder. Det blir som å ha en pipeline som er trimmet for Formel 1-løp. Verktøy som Serverless Framework eller AWS SAM tar seg av det meste av pakking og deploy, og de er nesten som magi når det gjelder automatisering.
-
- Men – og dette er et stort men – hvis du har hundrevis av små funksjoner, kan det føles som å holde styr på 100 spinnville katter. Avhengigheter må håndteres, og pipelines må være vanntette for å unngå kaos.
+ Serverløse løsninger gjør distribusjon vanvittig effektivt. Her snakker vi om små, selvstendige funksjoner som kan pushes til skyen på sekunder. Det blir som å ha en pipeline som er trimmet for Formel 1-løp. Verktøy som Serverless Framework eller AWS SAM tar seg av det meste av pakking og deploy, og de er nesten som magi når det gjelder automatisering. Men – og dette er et stort men – hvis du har hundrevis av små funksjoner, kan det føles som å holde styr på 100 spinnville katter. Avhengigheter må håndteres, og pipelines må være vanntette for å unngå kaos.
 
 - **Mikrotjenestearkitektur**
 Mikrotjenester er derimot litt som tunge maskiner – større og kraftigere, men ikke like lette å flytte rundt. Her er CI/CD litt mer omfattende fordi containerisering (tenk Docker) og orkestrering (Kubernetes) er standarden. Det krever mer innsats, men til gjengjeld får du robust kontroll over hele kjeden fra bygg til deploy.
@@ -153,3 +151,26 @@ Alt er ditt ansvar. Dette kan være både bra og dårlig. Du har full kontroll, 
 
 ### Konklusjon
 Valget mellom serverløst og mikrotjenester handler om prioriteringer. Serverløst gir deg fart og fleksibilitet, mens mikrotjenester gir deg kontroll og stabilitet. For applikasjoner med uforutsigbare arbeidsmengder eller strenge budsjettkrav kan serverløst være et fantastisk valg. Men hvis du trenger langvarig kontroll og kompleks funksjonalitet, er mikrotjenester kanskje mer din greie.
+
+### Kilder
+
+
+1. **Glenn Bech - Forelesninger i PGR301**  
+   Bech, G. (2024). *PGR301: DevOps prinsipper og praksis*.  
+   Forelesningsmateriale, Høyskolen Kristiania, Oslo, Norge.
+
+2. **AWS Lambda Documentation**  
+   Amazon Web Services. (n.d.). *AWS Lambda Developer Guide*.  
+   [https://docs.aws.amazon.com/lambda/index.html](https://docs.aws.amazon.com/lambda/index.html)
+
+3. **Serverless Framework Documentation**  
+   Serverless, Inc. (n.d.). *Serverless Framework Documentation*.  
+   [https://www.serverless.com/framework/docs](https://www.serverless.com/framework/docs)
+
+4. **Kubernetes Documentation**  
+   Cloud Native Computing Foundation. (n.d.). *Kubernetes Concepts Overview*.  
+   [https://kubernetes.io/docs/concepts/overview/](https://kubernetes.io/docs/concepts/overview/)
+
+5. **Prometheus Monitoring Documentation**  
+   Prometheus. (n.d.). *Introduction to Prometheus*.  
+   [https://prometheus.io/docs/introduction/overview/](https://prometheus.io/docs/introduction/overview/)
