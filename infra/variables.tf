@@ -6,6 +6,7 @@ variable "alarm_email" {
   type        = string
 }
 
+
 variable "alarm_threshold" {
   description = "The threshold for the ApproximateAgeOfOldestMessage metric, in seconds."
   type        = number
