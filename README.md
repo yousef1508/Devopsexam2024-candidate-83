@@ -95,7 +95,7 @@ docker run -e AWS_ACCESS_KEY_ID=<din-aws-access-key> \
 
 ---
 
-## Oppgave 4: Beregninger og overvåking
+## Oppgave 4: monitoring og overvåking
 
 ### Oversikt
 Implementert **CloudWatch Alarm** for å overvåke SQS-forsinkelser og sende e-postvarsler ved hjelp av **SNS**.
