@@ -13,6 +13,13 @@ Globals:
       LogFormat: JSON
 
 Resources:
+  MyRegionalRestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: MyRegionalApi-cand-83
+      StageName: Prod
+      EndpointConfiguration: REGIONAL
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -41,15 +48,6 @@ Resources:
             RestApiId: !Ref MyRegionalRestApi
             Path: /generate
             Method: post
-
-MyRegionalRestApi:
-  Type: AWS::Serverless::Api
-  Properties:
-    Name: MyRegionalApi-cand-83
-    StageName: Prod
-    EndpointConfiguration: REGIONAL
-
-
 
 Outputs:
   HelloWorldApi:
