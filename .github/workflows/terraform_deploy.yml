@@ -42,7 +42,7 @@ jobs:
           zip lambda_sqs.py.zip lambda_sqs.py
 
       # Step 6: Branch-specific behavior
-    - name: Branch-specific behavior (Plan or apply)
+      - name: Terraform Plan or Apply
         env:
           TF_VAR_alarm_email: ${{ secrets.ALARM_EMAIL }}
         run: |
