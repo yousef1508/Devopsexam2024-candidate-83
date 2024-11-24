@@ -63,12 +63,11 @@ Dockerfilen bruker en flertrinns strategi:
 bygger appen med Maven og lager et kompakt kjøretidsbilde med (`eclipse-temurin:17-jre`)
 Dette sikrer at det er kompakt og effektivit. 
 
-### 3B
+### 3B: Publish Docker Image to Docker Hub
 Jeg valgte å bruke latest-taggen for Docker-imaget. 
 Grunnen er ganske enkel: det gjør alt mye mer praktisk. 
-Når noen trekker ned imaget fra Docker Hub, får de alltid den nyeste og mest oppdaterte versjonen uten å måtte bekymre seg for detaljer. 
-Selvfølgelig, i fremtiden, hvis det er behov for flere versjoner eller sikre kompatibilitet,
-kunne jeg ha lagt til til spesifikke versjonstags.
+Når noen trekker ned imaget fra Docker Hub, får de alltid den nyeste og mest oppdaterte versjonen uten å måtte bekymre seg for detaljer. hvis det er behov for flere versjoner eller sikre kompatibilitet,
+kunne jeg ha lagt til spesifikke versjonstags.
 Men akkurat nå fungerer det best å holde det enkelt og oversiktlig, som samt svarer på 3b fullt fra mitt perspektiv.
 
 
@@ -81,7 +80,10 @@ container Image name
   [https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83](https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83)
 
 
-**instruksjoner:**
+####instruksjoner:
+for å kjøre docker containeren
+
+```bash
 
 docker pull yousef1508/java-sqs-client:latest
 
@@ -89,3 +91,21 @@ docker run -e AWS_ACCESS_KEY_ID=<din-aws-access-key> \
            -e AWS_SECRET_ACCESS_KEY=<din-aws-secret-key> \
            -e SQS_QUEUE_URL=https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83 \
            yousef1508/java-sqs-client:latest "Din melding her"
+```
+
+---
+
+## Task 4: Metrics and Monitoring
+
+### Overview
+Implemented **CloudWatch Alarm** to monitor SQS delays and send email alerts using **SNS**.
+
+### Key Features
+- **CloudWatch Alarm**: Triggers if the oldest message in the SQS queue exceeds the threshold (default: 300 seconds).
+- **SNS Notifications**: Sends email alerts to the specified address (`sqs-alarm-cand83`).
+
+### How to Test
+1. Send a delayed message:
+   ```bash
+   aws sqs send-message --queue-url <queue-url> --message-body "Test" --delay-seconds 20
+     ```

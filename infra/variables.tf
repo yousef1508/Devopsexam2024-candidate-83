@@ -4,7 +4,6 @@ variable "region" {
 variable "alarm_email" {
   description = "The email address to receive CloudWatch alarm notifications."
   type        = string
-  default     = "yousef1508@gmail.com"
 }
 
 variable "alarm_threshold" {
