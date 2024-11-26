@@ -32,10 +32,10 @@ For å teste HTTP-endepunktet kan du bruke følgende eksempel i Postman eller `c
 
 
 - **Lambda Function Name:** `sqs-image-generator`
-- **SQS Queue ARN:** `arn:aws:sqs:eu-west-1:244530008913:image-generation-queue-cand83`
+- **SQS Queue ARN:** `arn:aws:sqs:eu-west-1:244530008913:image-gen-queue-83`
 
  - **SQS Queue URL**:  
-  URL: [https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83](https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83)
+  URL: [https://sqs.eu-west-1.amazonaws.com/244530008913/image-gen-queue-83](https://sqs.eu-west-1.amazonaws.com/244530008913/image-gen-queue-83))
 
 ### 2B
 
@@ -80,7 +80,7 @@ container Image name
   [https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83](https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83)
 
 
-####instruksjoner:
+#### instruksjoner:
 for å kjøre docker containeren
 
 ```bash
@@ -105,7 +105,7 @@ Implementert **CloudWatch Alarm** for å overvåke SQS-forsinkelser og sende e-p
 - **SNS-Notifications**: Sender e-postvarsler til den angitte adressen (i sns topicen `sqs-alarm-cand83`).
 
 ### Hvordan teste
-1. Send en delayed melding:
+1. slå av lambda funksjonen midlertidig og Send en vanlig eller en delayed melding over thresholden:
    ```bash
     aws sqs send-message --queue-url https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83 --message-body "Delayed Test Message" --delay-seconds 68 
     ```
