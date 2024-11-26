@@ -12,6 +12,12 @@ Below are the versions of tools and dependencies used in this project:
 
 
 
+### Omfang og struktur
+
+Oppgaven er holdt kort og konsis i henhold til retningslinjene gitt av professor Glenn Bech i en e-post sendt til kandidatene. Professoren understreket viktigheten av å fokusere på presis og klar fremstilling fremfor lange og detaljerte utredninger. Dette har blitt reflektert i hvordan oppgaven er strukturert og presentert.
+
+---
+
 ## Leveranser:
 
 ### Oppgave 1
