@@ -1,3 +1,17 @@
+### Versions and Dependencies
+
+Below are the versions of tools and dependencies used in this project:
+
+- **Terraform**: `v1.9.8`
+- **AWS CLI**: `aws-cli/2.21.0 Python/3.12.6`
+- **SAM CLI**: `1.112.0`
+- **Python**: `3.9.16`
+- **Git**: `2.40.1`
+- **Operating System**:  
+  `Linux ip-172-31-26-121.eu-west-1.compute.internal 6.1.112-124.190.amzn2023.x86_64 #1 SMP PREEMPT_DYNAMIC Wed Oct 23 06:32:04 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux`
+
+
+
 ## Leveranser:
 
 ### Oppgave 1
@@ -28,6 +42,7 @@ For å teste HTTP-endepunktet kan du bruke følgende eksempel i Postman eller `c
 
 ### Oppgave 2
 
+<<<<<<< HEAD
  ### 2A 
 
 
@@ -36,6 +51,14 @@ For å teste HTTP-endepunktet kan du bruke følgende eksempel i Postman eller `c
 
  - **SQS Queue URL**:  
   URL: [https://sqs.eu-west-1.amazonaws.com/244530008913/image-gen-queue-83](https://sqs.eu-west-1.amazonaws.com/244530008913/image-gen-queue-83))
+=======
+### Lambda and SQS Details
+- **Lambda Function Name:** `sqs-image-generator`
+- **SQS Queue ARN:** `arn:aws:sqs:eu-west-1:244530008913:image-generation-queue-cand83`
+- **SQS Queue URL:**  
+  [https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83](https://sqs.eu-west-1.amazonaws.com/244530008913/image-generation-queue-cand83)
+
+>>>>>>> 0baeee1 (Readme update)
 
 ### 2B
 
@@ -113,42 +136,41 @@ Implementert **CloudWatch Alarm** for å overvåke SQS-forsinkelser og sende e-p
 ---
 
 
-### Oppgave 5: Serverless, Function-as-a-Service vs. Container Technology
+# Oppgave 5: Serverless, Function-as-a-Service vs. Container Technology
 
-Implementering av systemer med serverløs arkitektur, som AWS Lambda og SQS, kontra en mer tradisjonell mikrotjenestearkitektur, er et ganske heftig tema. Begge tilnærmingene har styrker og svakheter, og hva som fungerer best kommer helt an på brukstilfellet. Her skal jeg bryte det ned basert på fire DevOps-prinsipper: Automatisering og CI/CD, Observabilitet, Skalerbarhet og kostnadskontroll, og til slutt Eiendomsrett og ansvar.
+Implementering av systemer med serverløs arkitektur, som AWS Lambda og SQS, kontra en mer tradisjonell mikrotjenestearkitektur, er et omfattende tema. Begge tilnærmingene har sine styrker og svakheter, og det beste valget avhenger av det spesifikke brukstilfellet. Nedenfor analyseres disse arkitekturene basert på fire DevOps-prinsipper: Automatisering og CI/CD, Observabilitet, Skalerbarhet og kostnadskontroll, samt Eiendomsrett og ansvar.
 
-#### 1. **Automatisering og CI/CD**
-- **Serverløs arkitektur**
- Serverløse løsninger gjør distribusjon vanvittig effektivt. Her snakker vi om små, selvstendige funksjoner som kan pushes til skyen på sekunder. Det blir som å ha en pipeline som er trimmet for Formel 1-løp. Verktøy som Serverless Framework eller AWS SAM tar seg av det meste av pakking og deploy, og de er nesten som magi når det gjelder automatisering. Men – og dette er et stort men – hvis du har hundrevis av små funksjoner, kan det føles som å holde styr på 100 spinnville katter. Avhengigheter må håndteres, og pipelines må være vanntette for å unngå kaos.
+## 1. **Automatisering og CI/CD**
 
-- **Mikrotjenestearkitektur**
-Mikrotjenester er derimot litt som tunge maskiner – større og kraftigere, men ikke like lette å flytte rundt. Her er CI/CD litt mer omfattende fordi containerisering (tenk Docker) og orkestrering (Kubernetes) er standarden. Det krever mer innsats, men til gjengjeld får du robust kontroll over hele kjeden fra bygg til deploy.
+- **Serverløs arkitektur**: Serverløse løsninger muliggjør effektiv distribusjon gjennom små, selvstendige funksjoner som kan implementeres raskt. Verktøy som Serverless Framework eller AWS SAM forenkler pakking og distribusjon, noe som fremmer automatisering. Imidlertid kan håndtering av mange små funksjoner introdusere kompleksitet, spesielt når det gjelder avhengigheter og vedlikehold av CI/CD-pipelines (ProDevOpsGuyTech, n.d.).
 
-#### 2. **Observabilitet (Overvåking)**
-- **Serverløs arkitektur**
-Dette er kanskje der serverløst virkelig utfordrer deg. Overvåking og logging er som å jobbe med en usynlig fiende. Alt er abstrakt. Du er helt avhengig av verktøy som AWS CloudWatch for innsikt, og "cold starts" kan være en pest og plage å diagnostisere.
+- **Mikrotjenestearkitektur**: Mikrotjenester benytter ofte containerisering (f.eks. Docker) og orkestrering (f.eks. Kubernetes), noe som kan gjøre CI/CD-prosessen mer omfattende. Dette krever mer innsats, men gir robust kontroll over hele kjeden fra bygging til distribusjon.
 
-Den distribuerte naturen gjør feilsøking litt som å lete etter en nål i en høystakk. Du må virkelig ha styr på sentralisert logging og trace-verktøy for å få overblikk.
+## 2. **Observabilitet (Overvåking)**
 
-- **Mikrotjenestearkitektur**
-Her er overvåkingsspillet litt mer tradisjonelt. Du kan bruke Prometheus, Grafana, eller lignende verktøy til å hente metrikker og holde oversikt over alt. Kompleksiteten ligger i å samle logger fra alle tjenestene og sette dem sammen til noe meningsfullt. Men det er i det minste en kjent utfordring.
+- **Serverløs arkitektur**: Overvåking og logging i serverløse miljøer kan være utfordrende på grunn av deres abstrakte natur. Verktøy som AWS CloudWatch er essensielle for innsikt, men "cold starts" kan være vanskelige å diagnostisere. Den distribuerte naturen krever effektiv bruk av sentralisert logging og sporingsverktøy for å oppnå oversikt (Lumigo, n.d.).
 
-#### 3. **Skalerbarhet og kostnadskontroll**
-- **Serverløs arkitektur**
-Hvis vi snakker om elastisitet, er serverløst uslåelig. Det skalerer opp og ned som en drøm uten at du trenger å røre en finger. Og kostnadene? Du betaler kun for hva du bruker. Hvis trafikken din er ujevn, er dette gull.
+- **Mikrotjenestearkitektur**: Her er overvåking mer tradisjonell, med bruk av verktøy som Prometheus og Grafana for å samle inn metrikker. Utfordringen ligger i å aggregere logger fra ulike tjenester for å få en helhetlig forståelse av systemets tilstand.
 
-Men – og dette er viktig – hvis du har konstant høy trafikk, kan det bli dyrere enn mikrotjenester. Kostnad per kall kan virkelig samle seg opp.
+## 3. **Skalerbarhet og kostnadskontroll**
 
-- **Mikrotjenestearkitektur**
-Her har du mer kontroll. Du kan provisionere nøyaktig hvor mye du trenger og optimalisere ressursene. Skalerbarheten er også solid, men den krever at du holder på med konfigurering og administrasjon. Det er som en manuelt justert motor: kraftig, men arbeidskrevende.
+- **Serverløs arkitektur**: Serverløse løsninger tilbyr automatisk skalering og en betalingsmodell basert på faktisk bruk, noe som er ideelt for applikasjoner med varierende trafikkmønstre. Imidlertid kan konstant høy trafikk føre til høyere kostnader sammenlignet med mikrotjenester (Enov8, n.d.).
 
-#### 4. **Eiendomsrett og ansvar**
-- **Serverløs arkitektur**
-Her ligger mye av ansvaret hos skytilbyderen. Du skriver kode, de tar seg av resten. Det er mindre å bekymre seg for, men også mindre kontroll. Hvis det går galt, er det som regel du som må finne løsningen på skyens premisser.
+- **Mikrotjenestearkitektur**: Gir mer kontroll over ressursallokering og kostnader. Skalerbarheten er solid, men krever manuell konfigurering og administrasjon for optimal ytelse og kostnadseffektivitet.
 
-- **Mikrotjenestearkitektur**
-Alt er ditt ansvar. Dette kan være både bra og dårlig. Du har full kontroll, men det betyr også at du må holde alt i gang, fra infrastruktur til pålitelighet og ytelse.
+## 4. **Eiendomsrett og ansvar**
 
-### Konklusjon
-Valget mellom serverløst og mikrotjenester handler om prioriteringer. Serverløst gir deg fart og fleksibilitet, mens mikrotjenester gir deg kontroll og stabilitet. For applikasjoner med uforutsigbare arbeidsmengder eller strenge budsjettkrav kan serverløst være et fantastisk valg. Men hvis du trenger langvarig kontroll og kompleks funksjonalitet, er mikrotjenester kanskje mer din greie.
+- **Serverløs arkitektur**: Skytilbyderen håndterer mye av infrastrukturen, noe som reduserer administrasjonsbyrden for utviklere. Dette gir mindre kontroll, og ved problemer må løsninger ofte tilpasses leverandørens rammer (MoldStud, n.d.).
 
+- **Mikrotjenestearkitektur**: Gir full kontroll over infrastrukturen, men krever også at organisasjonen tar ansvar for alle aspekter av drift, inkludert pålitelighet og ytelse.
+
+## Konklusjon
+
+Valget mellom serverløs og mikrotjenestearkitektur avhenger av spesifikke behov og prioriteringer. Serverløse løsninger gir rask implementering og fleksibilitet, mens mikrotjenester tilbyr større kontroll og stabilitet. For applikasjoner med uforutsigbare arbeidsmengder eller strenge budsjettkrav kan serverløst være et godt valg. For mer komplekse applikasjoner som krever langvarig kontroll, kan mikrotjenester være mer passende.
+
+## Referanser
+
+- ProDevOpsGuyTech. (n.d.). *Serverless CI/CD: How to Build a Pipeline Without Servers*. Dev.to. Retrieved from [https://dev.to/prodevopsguytech/serverless-cicd-how-to-build-a-pipeline-without-servers-fn2](https://dev.to/prodevopsguytech/serverless-cicd-how-to-build-a-pipeline-without-servers-fn2)
+- Lumigo. (n.d.). *Microservices Observability: 3 Pillars and 6 Patterns*. Lumigo. Retrieved from [https://lumigo.io/microservices-monitoring/microservices-observability](https://lumigo.io/microservices-monitoring/microservices-observability)
+- Enov8. (n.d.). *Serverless Architectures: Benefits and Challenges*. Enov8. Retrieved from [https://www.enov8.com/blog/serverless-architectures-benefits-and-challenges](https://www.enov8.com/blog/serverless-architectures-benefits-and-challenges)
+- MoldStud. (n.d.). *Serverless in the Enterprise: Challenges and Solutions for Large-Scale Deployment*. MoldStud. Retrieved from [https://moldstud.com/articles/p-serverless-in-the-enterprise-challenges-and-solutions-for-large-scale-deployment](https://moldstud.com/articles/p-serverless-in-the-enterprise-challenges-and-solutions-for-large-scale-deployment)
